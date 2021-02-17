@@ -19,7 +19,7 @@
 }
 
 @mixin static($class, $property, $min, $max, $unit: 'px', $step: 1, $factor: 1) {
-  @if $min < 0 or $max < 0 or $max < $min {
+  @if $max < $min {
     @error "$min and $max values must be > 0 and $max > $min";
   }
   @if $step <= 0 {
