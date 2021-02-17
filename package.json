@@ -10,7 +10,18 @@
     "node-sass": "5.0.0",
     "sassdoc": "2.7.3"
   },
-  "description": "Useful Scss mixins to manage fluid, breakpoint and static Css properties",
+	"keywords": [
+		"Scss",
+		"Scss helpers",
+		"Scss tools",
+		"Scss mixins",
+		"Scss utilities",
+		"Scss fluid",
+		"Scss responsive",
+		"Scss breakpoint",
+		"Scss static"
+	],
+  "description": "Useful Scss mixins to manage fluid, responsive and static Css properties",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DidoMarchet/scss-utopia.git"
