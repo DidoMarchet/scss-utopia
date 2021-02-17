@@ -1,2 +1,4 @@
-# scss-utopia
-Useful Scss mixins to manage fluid, breakpoint and static Css properties
+:book: 
+> **utopia** (countable and uncountable, plural utopia or utopias)
+> 
+> _A world in which everything and everyone works in perfect harmony._
