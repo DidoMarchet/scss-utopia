@@ -1,0 +1,24 @@
+{
+  "name": "scss-utopia",
+  "version": "1.0.0",
+  "files": [
+    "lib"
+  ],
+  "main": "./lib/index.scss",
+  "style": "./lib/index.scss",
+  "devDependencies": {
+    "node-sass": "5.0.0",
+    "sassdoc": "2.7.3"
+  },
+  "description": "Useful Scss mixins to manage fluid, breakpoint and static Css properties",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DidoMarchet/scss-utopia.git"
+  },
+  "author": "Davide Marchet",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DidoMarchet/scss-utopia/issues"
+  },
+  "homepage": "https://github.com/DidoMarchet/scss-utopia#readme"
+}
