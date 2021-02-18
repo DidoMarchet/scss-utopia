@@ -5,4 +5,4 @@
 
 :waning_crescent_moon: Css (Scss) is not an exact science and manage easily fluid, responsive and static styles in perfect harmony with designer's vision (IMHO) is utopia. 
 
-:waning_gibbous_moon: Is for that purpose [scss-utopia](https://www.npmjs.com/package/scss-utopia) was created: cover most developer needs in the simplest and automated way!
+:waning_gibbous_moon: Is for that purpose [scss-utopia](https://www.npmjs.com/package/scss-utopia) was created: cover **most developer needs** in the simplest and automated way!
