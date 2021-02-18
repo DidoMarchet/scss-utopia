@@ -1,0 +1,17 @@
+@import 'react';
+
+/// Create responsive rules based on breakpoints
+/// @author Davide Marcher
+/// @param {String} $property - Css property name
+/// @param {List} $sizes - key value list ('small': value, medium: value, [...])
+/// @require react
+
+@mixin resp($property, $sizes) {
+  @each $breakpoint, $size in $sizes {
+
+    @include react(#{$breakpoint}){
+      #{$property}: $size;
+    }
+
+  }
+}

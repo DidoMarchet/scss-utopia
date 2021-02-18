@@ -1,0 +1,17 @@
+@import 'utils';
+
+@mixin static($class, $property, $min, $max, $factor: 10, $step: 1, $unit: 'px') {
+  @if $max < $min {
+    @error "$min (#{$min}) and $max (#{$max}) values must be > 0 and $min (#{$min}) < $max (#{$max}) ";
+  }
+  @if $step <= 0 {
+    @error "$step (#{$step}) > 0";
+  }
+  @for $i from $min through $max {
+    @if $i % $step == 0 {
+      .#{$class}-#{str-replace(#{$i*$factor}, '.', $replace: '-')} {
+        #{$property}: #{$i*$factor}#{$unit};
+      }
+    }
+  }
+}
