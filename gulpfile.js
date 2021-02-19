@@ -5,6 +5,7 @@ exports.default = function() {
   return gulp.src(
     [
       'src/namespaces.scss',
+      'src/breakpoints.scss',
       'src/react.scss',
       'src/resp.scss',
       'src/fluid.scss',

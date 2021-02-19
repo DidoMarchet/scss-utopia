@@ -1,14 +1,4 @@
 /// Original mixins https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/
-$defaults: (
-  "small": (min-width: 320px), 
-  "medium": (min-width: 750px),
-  "large": (min-width: 1000px),
-  "xlarge": (min-width: 1300px),
-  "pointer": (pointer: fine) and (hover: hover),
-  "touch": (pointer: coarse) and (hover: none)
-);
-
-$breakpoints: ()!default;
 
 /// Mixin to manage responsive breakpoints
 /// @author Hugo Giraudel
