@@ -1,5 +1,7 @@
 /// Original function https://css-tricks.com/snippets/sass/str-replace-function/
 
+@use "sass:string";
+
 /// Replace `$search` with `$replace` in `$string`
 /// @author Hugo Giraudel
 /// @param {String} $string - Initial string

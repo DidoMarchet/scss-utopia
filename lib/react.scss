@@ -1,15 +1,18 @@
 /// Original mixins https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/
 @use "sass:meta";
 @use "sass:map";
+@use "sass:list";
 
-$breakpoints: (
+$defaults: (
   "small": (min-width: 320px), 
   "medium": (min-width: 750px),
   "large": (min-width: 1000px),
   "xlarge": (min-width: 1300px),
   "pointer": (pointer: fine) and (hover: hover),
   "touch": (pointer: coarse) and (hover: none)
-)!default;
+);
+
+$breakpoints: ()!default;
 
 /// Mixin to manage responsive breakpoints
 /// @author Hugo Giraudel
@@ -17,13 +20,14 @@ $breakpoints: (
 /// @require $breakpoints
 
 @mixin react($breakpoint) {
-  @if map.has-key($breakpoints, $breakpoint) {
-    @media #{meta.inspect(map.get($breakpoints, $breakpoint))} {
+  $merged: map.merge($defaults, $breakpoints);
+  @if map.has-key($merged, $breakpoint) {
+    @media #{meta.inspect(map.get($merged, $breakpoint))} {
       @content;
     }
   }
   @else {
     @warn "No value could be retrieved from `#{$breakpoint}`. "
-        + "Available breakpoints are: #{map.keys($breakpoints)}.";
+        + "Available breakpoints are: #{map.keys(map.merge($defaults, $breakpoints))}.";
   }
 }
