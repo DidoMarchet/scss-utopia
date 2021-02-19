@@ -1,0 +1,111 @@
+@use "sass:list";
+@use "sass:meta";
+@use "sass:map";
+@use "sass:string";
+
+/// Original function https://css-tricks.com/snippets/sass/str-replace-function/
+/// Replace `$search` with `$replace` in `$string`
+/// @author Hugo Giraudel
+/// @param {String} $string - Initial string
+/// @param {String} $search - Substring to replace
+/// @param {String} $replace ('') - New value
+/// @return {String} - Updated string
+
+@function str-replace($string, $search, $replace: '') {
+  $index: string.index($string, $search);
+  
+  @if $index {
+    @return string.slice($string, 1, $index - 1) + $replace + str-replace(string.slice($string, $index + string.length($search)), $search, $replace);
+  }
+  
+  @return $string;
+}
+
+/// Original mixins https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/
+$defaults: (
+  "small": (min-width: 320px), 
+  "medium": (min-width: 750px),
+  "large": (min-width: 1000px),
+  "xlarge": (min-width: 1300px),
+  "pointer": (pointer: fine) and (hover: hover),
+  "touch": (pointer: coarse) and (hover: none)
+);
+
+$breakpoints: ()!default;
+
+/// Mixin to manage responsive breakpoints
+/// @author Hugo Giraudel
+/// @param {String} $breakpoint - Breakpoint name
+/// @require $breakpoints
+
+@mixin react($breakpoint) {
+  $merged: map.merge($defaults, $breakpoints);
+  @if map.has-key($merged, $breakpoint) {
+    @media #{meta.inspect(map.get($merged, $breakpoint))} {
+      @content;
+    }
+  }
+  @else {
+    @warn "No value could be retrieved from `#{$breakpoint}`. "
+        + "Available breakpoints are: #{map.keys(map.merge($defaults, $breakpoints))}.";
+  }
+}
+
+/// Create responsive rules based on breakpoints
+/// @author Davide Marchet
+/// @param {String} $property - Css property name
+/// @param {List} $sizes - Key:value list ('small': value, medium: value, [...])
+/// @require react
+
+@mixin resp($property, $sizes) {
+  @each $breakpoint, $size in $sizes {
+
+    @include react(#{$breakpoint}){
+      #{$property}: $size;
+    }
+
+  }
+}
+
+/// Inspired by https://www.bronco.co.uk/our-ideas/creating-a-clamp-fallback-function-in-sass-scss/
+/// Create clamp rules and fallback for old browser
+/// @author Davide Marchet
+/// @param {String} $property - Css property name
+/// @param {List} $sizes - Clamp values (min scaler max, min scaler max, [...])
+
+@mixin fluid($property, $sizes) {
+  $staticValues: ();
+  $minMaxValues: ();
+  $clampValues: ();
+
+  @each $size in $sizes {
+    $values: ();
+
+    @each $value in $size {
+      $values: list.append($values, $value, $separator: comma);
+    }
+
+    $staticValues: list.append($staticValues, #{list.nth($values, 3)});
+    $minMaxValues: list.append($minMaxValues, min(max(#{list.nth($values, 1)}, #{list.nth($values, 2)}), #{list.nth($values, 3)}));
+    $clampValues: list.append($clampValues, clamp(#{$values}));
+  }
+
+  #{$property}: $staticValues;
+  #{$property}: $minMaxValues;
+  #{$property}: $clampValues;
+}
+
+/// Create static rule
+/// @author Davide Marchet
+/// @param {String} $class - Class name
+/// @param {String} $property - Css property name
+/// @param {List} $sizes - Static values (10, 25, 40, [...])
+/// @param {String} $unit -  Unit
+
+@mixin static($class, $property, $sizes, $unit: 'px') {
+  @each $size in $sizes {
+    .#{$class}-#{str-replace(#{$size}, '.', $replace: '-')} {
+      #{$property}: #{$size}#{$unit};
+    }
+  }
+}

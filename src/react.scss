@@ -1,8 +1,4 @@
 /// Original mixins https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/
-@use "sass:meta";
-@use "sass:map";
-@use "sass:list";
-
 $defaults: (
   "small": (min-width: 320px), 
   "medium": (min-width: 750px),

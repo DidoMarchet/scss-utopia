@@ -2,13 +2,17 @@
   "name": "scss-utopia",
   "version": "1.0.0",
   "files": [
-    "lib"
+    "dist"
   ],
-  "main": "./lib/index.scss",
-  "style": "./lib/index.scss",
+  "main": "./dist/index.scss",
+  "style": "./dist/index.scss",
   "devDependencies": {
-    "node-sass": "5.0.0",
-    "sassdoc": "2.7.3"
+    "gulp": "^4.0.2",
+    "gulp-load-plugins": "^1.4.0",
+    "gulp-concat": "^2.5.2"
+  },
+  "scripts": {
+    "build": "gulp"
   },
   "keywords": [
     "Scss",

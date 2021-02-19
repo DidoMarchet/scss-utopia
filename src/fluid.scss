@@ -1,7 +1,4 @@
 /// Inspired by https://www.bronco.co.uk/our-ideas/creating-a-clamp-fallback-function-in-sass-scss/
-
-@use "sass:list";
-
 /// Create clamp rules and fallback for old browser
 /// @author Davide Marchet
 /// @param {String} $property - Css property name
