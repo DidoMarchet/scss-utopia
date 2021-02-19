@@ -10,17 +10,17 @@
     "node-sass": "5.0.0",
     "sassdoc": "2.7.3"
   },
-	"keywords": [
-		"Scss",
-		"Scss helpers",
-		"Scss tools",
-		"Scss mixins",
-		"Scss utilities",
-		"Scss fluid",
-		"Scss responsive",
-		"Scss breakpoint",
-		"Scss static"
-	],
+  "keywords": [
+    "Scss",
+    "Scss helpers",
+    "Scss tools",
+    "Scss mixins",
+    "Scss utilities",
+    "Scss fluid",
+    "Scss responsive",
+    "Scss breakpoint",
+    "Scss static"
+  ],
   "description": "Useful Scss mixins to manage fluid, responsive and static Css properties",
   "repository": {
     "type": "git",
