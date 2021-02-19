@@ -1,25 +1,6 @@
 @use "sass:list";
 @use "sass:meta";
 @use "sass:map";
-@use "sass:string";
-
-/// Original function https://css-tricks.com/snippets/sass/str-replace-function/
-/// Replace `$search` with `$replace` in `$string`
-/// @author Hugo Giraudel
-/// @param {String} $string - Initial string
-/// @param {String} $search - Substring to replace
-/// @param {String} $replace ('') - New value
-/// @return {String} - Updated string
-
-@function str-replace($string, $search, $replace: '') {
-  $index: string.index($string, $search);
-  
-  @if $index {
-    @return string.slice($string, 1, $index - 1) + $replace + str-replace(string.slice($string, $index + string.length($search)), $search, $replace);
-  }
-  
-  @return $string;
-}
 
 /// Original mixins https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/
 $defaults: (
@@ -104,7 +85,7 @@ $breakpoints: ()!default;
 
 @mixin static($class, $property, $sizes, $unit: 'px') {
   @each $size in $sizes {
-    .#{$class}-#{str-replace(#{$size}, '.', $replace: '-')} {
+    .#{$class}-#{$size} {
       #{$property}: #{$size}#{$unit};
     }
   }
