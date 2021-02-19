@@ -1,9 +1,9 @@
 @import 'react';
 
 /// Create responsive rules based on breakpoints
-/// @author Davide Marcher
+/// @author Davide Marchet
 /// @param {String} $property - Css property name
-/// @param {List} $sizes - key value list ('small': value, medium: value, [...])
+/// @param {List} $sizes - Key:value list ('small': value, medium: value, [...])
 /// @require react
 
 @mixin resp($property, $sizes) {

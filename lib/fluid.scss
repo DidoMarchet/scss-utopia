@@ -3,11 +3,11 @@
 @use "sass:list";
 
 /// Create clamp rules and fallback for old browser
-/// @author Davide Marcher
+/// @author Davide Marchet
 /// @param {String} $property - Css property name
 /// @param {List} $sizes - Clamp values (min scaler max, min scaler max, [...])
 
-@mixin clamp($property, $sizes) {
+@mixin fluid($property, $sizes) {
   $staticValues: ();
   $minMaxValues: ();
   $clampValues: ();
