@@ -195,3 +195,48 @@ p{
 */
 ```
 
+# Automate static rules
+And finally we have the [static mixin](https://github.com/DidoMarchet/scss-utopia/blob/main/src/static.scss) a simple generator of static classes.
+
+It takes as parameters:
+
+- `$class` the name of the class
+- `$property` the css property
+- `$sizes` a list of static values 
+- `$unit` the unit for expressing a length (default `px`)
+
+```
+@include static('text', 'font-size' , (1, 1.25, 1.5), 'rem');
+@include static('marginTop', 'margin-top' , (25, 50, 75, 100));
+
+/*
+  Will generate:
+
+  .text-1 {
+    font-size: 1rem;
+  }
+  .text-1-25 {
+    font-size: 1.25rem;
+  }
+  .text-1-5 {
+    font-size: 1.5rem;
+  }
+  .marginTop-25 {
+    margin-top: 25px;
+  }
+  .marginTop-50 {
+    margin-top: 50px;
+  }
+  .marginTop-75 {
+    margin-top: 75px;
+  }
+  .marginTop-100 {
+    margin-top: 100px;
+  }
+*/
+```
+
+:warning: At this point **I was lazy** and I don't care about shorthand property such as `margin: 25px 50px` or `margin: 25px 50px 25px 50px` 🙏
+
+
+
