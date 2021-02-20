@@ -236,7 +236,7 @@ It takes as parameters:
 */
 ```
 
-:warning: At this point **I was lazy** and I don't care about shorthand property such as `margin: 25px 50px` or `margin: 25px 50px 25px 50px` 🙏
+:warning: At this point **I was lazy** and I don't care about shorthand property such as `margin: 25px 50px` or `margin: 25px 50px 25px 50px` maybe in the future I'll do 🙏
 
 # Disclaimer
 [scss-utopia](https://www.npmjs.com/package/scss-utopia) cover a major part of your needs but with limitations. 
