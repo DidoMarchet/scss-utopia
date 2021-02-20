@@ -1,11 +1,13 @@
+# scss-utopia: quickly master scss  responsive and fluid rules 
+
 :book: From [https://en.wiktionary.org/wiki/utopia](https://en.wiktionary.org/wiki/utopia)
 > **utopia**
 > 
 > _A world in which everything and everyone works in perfect harmony._
 
-:waning_crescent_moon: Css (Scss) is not an exact science and manage easily fluid and responsive styles in perfect harmony with designer's vision (IMHO) is utopia. 
+:waning_crescent_moon: Css is not an exact science and managing easily fluid and responsive styles in perfect harmony with designer's vision (IMHO) is utopia. 
 
-:waning_gibbous_moon: Is for that purpose [scss-utopia](https://www.npmjs.com/package/scss-utopia) was created: cover **most developer needs**  in terms of typography, spacing and sizes ([...]) in the simplest and automated possible way!
+:waning_gibbous_moon: For that purpose [scss-utopia](https://www.npmjs.com/package/scss-utopia) was created: covering **most developer needs**  in terms of typography, spacing and sizes ([...]) in the simplest and automated possible way!
 
 ### Table of content:
 - [Breakpoints](#breakpoints)
@@ -48,7 +50,7 @@ $defaults: (
 );
 ```
 
-Using `$breakpoints` variable in your scss stylesheet you can **easily extend and override** the defaults values adopting **consistent naming convention**:
+Using `$breakpoints` variable in your scss stylesheet you can **easily extend and override** the default values adopting **consistent naming convention**:
 
 ``` scss
 $breakpoints: (
@@ -66,16 +68,16 @@ The resulting set of values will be the merge of `$defaults` and `$breakpoints` 
   "small": (min-width: 320px), 
   "medium": (min-width: 750px),
   "large": (min-width: 1000px),
-  "xlarge": (min-width: 1600px),
+  "xlarge": (min-width: 1600px), // overrited 
   "pointer": (pointer: fine) and (hover: hover),
   "touch": (pointer: coarse) and (hover: none),
-  "tablet": (min-width: 768px) and (max-width: 1024px),
-  "large-retina": (-webkit-min-device-pixel-ratio: 2)  and (min-width: 1300px)
+  "tablet": (min-width: 768px) and (max-width: 1024px), // added
+  "large-retina": (-webkit-min-device-pixel-ratio: 2)  and (min-width: 1300px) // added
 */
 ```
 
 # Use Breakpoints
-Once we have declared all breakpoints we need, we can deliver tailored style to each them using the [react mixin](https://github.com/DidoMarchet/scss-utopia/blob/main/src/react.scss):
+Once we have declared all the breakpoints we need, we can deliver tailored style to each them using the [react mixin](https://github.com/DidoMarchet/scss-utopia/blob/main/src/react.scss):
 
 ``` scss
 @include react('medium'){
@@ -110,16 +112,22 @@ a{
 :cold_sweat: **Self guard:** *the mixin is called react because it has a reaction when a rule comes true, nothing in common with the js framework* 
 
 # Automate responsive rules
-At this point we have all instruments to handle the style if a certain condition is true.
-With [resp mixin](https://github.com/DidoMarchet/scss-utopia/blob/main/src/resp.scss) we can automate this process and generate quickly responsive rules.
+At this point we have all the instruments to handle the style if a certain condition is true.
+With [resp mixin](https://github.com/DidoMarchet/scss-utopia/blob/main/src/resp.scss) we can automate this process and quickly generate responsive rules.
 
-It takes as parameters:
+The mixin:
+
+``` scss
+@mixin resp($properties...){ /* code */ }
+```
+
+takes as parameters:
 
 - `$properties...` a list that contains **key/values pair**. 
 
 :warning: Key `name` is the name of css rule and it's required for each element.
 
-Other key/values pair has a breakpoints as key and a size as value.
+Other key/values pair have a breakpoint as key and a size as value.
 
 ``` scss
 p{
@@ -168,9 +176,15 @@ p{
 # Automate fluid rules
 Now it's time to leave responsive behaviour and **linearly scale rules** between an upper and lower bound. 
 
-The [fluid mixin](https://github.com/DidoMarchet/scss-utopia/blob/main/src/fluid.scss) use [clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/clamp()) css function and also provide a fallback for browsers that [don't support](https://caniuse.com/?search=clamp()) modern css solutions.
+The [fluid mixin](https://github.com/DidoMarchet/scss-utopia/blob/main/src/fluid.scss) uses [clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/clamp()) css function and also provides a fallback for browsers that [don't support](https://caniuse.com/?search=clamp()) modern css solutions.
 
-It takes as parameters:
+The mixin:
+
+``` scss
+@mixin fluid($property, $sizes...) { /* code */ }
+```
+
+takes as parameters:
 
 - `$property` the name of the css rule;
 - `$sizes...` a list of clamp parameters `(min scaler max, min scaler max, [...])`.
@@ -200,7 +214,7 @@ p{
 ```
 
 # Disclaimer
-[scss-utopia](https://www.npmjs.com/package/scss-utopia) covers a major part of your needs in terms of sizing, positioning and in general aspect.
+[scss-utopia](https://www.npmjs.com/package/scss-utopia) covers the majority of your needs in terms of sizing, positioning and in general aspect.
 
 However the mixins are not ideal to handle rules concerning layout (`grid` properties in particular). 
 
