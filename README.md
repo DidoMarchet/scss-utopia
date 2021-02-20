@@ -3,16 +3,15 @@
 > 
 > _A world in which everything and everyone works in perfect harmony._
 
-:waning_crescent_moon: Css (Scss) is not an exact science and manage easily fluid, responsive and static styles in perfect harmony with designer's vision (IMHO) is utopia. 
+:waning_crescent_moon: Css (Scss) is not an exact science and manage easily fluid and responsive styles in perfect harmony with designer's vision (IMHO) is utopia. 
 
-:waning_gibbous_moon: Is for that purpose [scss-utopia](https://www.npmjs.com/package/scss-utopia) was created: cover **most developer needs**  in terms of typography, spacing and sizes in the simplest and automated possible way!
+:waning_gibbous_moon: Is for that purpose [scss-utopia](https://www.npmjs.com/package/scss-utopia) was created: cover **most developer needs**  in terms of typography, spacing and sizes ([...]) in the simplest and automated possible way!
 
 ### Table of content:
 - [Breakpoints](#breakpoints)
 - [Use Breakpoints](#use-breakpoints)
 - [Automate responsive rules](#automate-responsive-rules)
 - [Automate fluid rules](#automate-fluid-rules)
-- [Automate static rules](#automate-static-rules)
 - [Disclaimer](#disclaimer)
 - [Awesome](#awesome)
 - [Thanks](#thanks)
@@ -28,6 +27,8 @@ and include it using an **@import** statement:
 
 ``` bash
 @import '~scss-utopia';
+@import 'node_modules/scss-utopia/dist/index.scss';
+[...]
 ```
 
 # Breakpoints
@@ -46,7 +47,7 @@ $defaults: (
 );
 ```
 
-Using `$breakpoints` variable in your scss stylesheet you can **easily extend and override**` the defaults values adopting **consistent naming convention**:
+Using `$breakpoints` variable in your scss stylesheet you can **easily extend and override** the defaults values adopting **consistent naming convention**:
 
 ```
 $breakpoints: (
@@ -57,7 +58,7 @@ $breakpoints: (
 );
 ```
 
-The result will be the merging of  `$defaults` and `$breakpoints`:
+The resulting set of values will be the merge of `$defaults` and `$breakpoints` variables:
 
 ```
 /*
@@ -108,14 +109,16 @@ a{
 :cold_sweat: **Self guard:** *the mixin is called react because it has a reaction when a rule comes true, nothing in common with the js framework* 
 
 # Automate responsive rules
-At this point we have all instruments to handle the responsive behaviour of our styles.
-With [resp mixin](https://github.com/DidoMarchet/scss-utopia/blob/main/src/resp.scss) we can generate quickly responsive rules.
+At this point we have all instruments to handle the style if a certain condition is true.
+With [resp mixin](https://github.com/DidoMarchet/scss-utopia/blob/main/src/resp.scss) we can automate this process and generate quickly responsive rules.
 
-The mixin take as parameters a list that contains **key/values pair**.
+It takes as parameters:
 
-:warning: `name` is the required for each element and its value is the name of the css property (e.g. font-size, padding, margin...)
+- '$properties...' a list that contains **key/values pair**. 
 
-Other keys are the values of breakpoint we have declared with the relative value of the css property.
+:warning: Key `name` is the name of css rule and it's required for each element.
+
+Other key/values pair has a breakpoints as key and a size as value.
 
 ```
 p{
@@ -162,14 +165,14 @@ p{
 ```
 
 # Automate fluid rules
-Now it's time to leave responsive behaviour and **linearly scale rules** between a set of minimum and maximum sizes.
+Now it's time to leave responsive behaviour and **linearly scale rules** between an upper and lower bound. 
 
-The [fluid mixin](https://github.com/DidoMarchet/scss-utopia/blob/main/src/fluid.scss) is based on [clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/clamp()) css function and also provide a fallback for browsers don't support modern css solutions.
+The [fluid mixin](https://github.com/DidoMarchet/scss-utopia/blob/main/src/fluid.scss) use [clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/clamp()) css function and also provide a fallback for browsers that [don't support](https://caniuse.com/?search=clamp()) modern css solutions.
 
 It takes as parameters:
 
-- `$property` the name of the fluid property
-- `$sizes...` a list of clamp parameters (min, scaler, max) comma separated.
+- `$property` the name of the css rule;
+- `$sizes...` a list of clamp parameters `(min scaler max, min scaler max, [...])`.
 
 ```
 p{
@@ -195,51 +198,9 @@ p{
 */
 ```
 
-# Automate static rules
-And finally we have the [static mixin](https://github.com/DidoMarchet/scss-utopia/blob/main/src/static.scss) a simple generator of static classes.
-
-It takes as parameters:
-
-- `$class` the name of the class
-- `$property` the css property
-- `$sizes` a list of static values 
-- `$unit` the unit for expressing a length (default `px`)
-
-```
-@include static('text', 'font-size' , (1, 1.25, 1.5), 'rem');
-@include static('marginTop', 'margin-top' , (25, 50, 75, 100));
-
-/*
-  Will generate:
-
-  .text-1 {
-    font-size: 1rem;
-  }
-  .text-1-25 {
-    font-size: 1.25rem;
-  }
-  .text-1-5 {
-    font-size: 1.5rem;
-  }
-  .marginTop-25 {
-    margin-top: 25px;
-  }
-  .marginTop-50 {
-    margin-top: 50px;
-  }
-  .marginTop-75 {
-    margin-top: 75px;
-  }
-  .marginTop-100 {
-    margin-top: 100px;
-  }
-*/
-```
-
-:warning: At this point **I was lazy** and I don't care about shorthand property such as `margin: 25px 50px` or `margin: 25px 50px 25px 50px` maybe in the future I'll do 🙏
-
 # Disclaimer
-[scss-utopia](https://www.npmjs.com/package/scss-utopia) cover a major part of your needs but with limitations. 
+[scss-utopia](https://www.npmjs.com/package/scss-utopia) covers a major part of your needs in terms of sizing, positioning and in general aspect.
+However the mixins are not ideal to handle rules concerning layout (`grid` properties in particular). 
 
 Have a fun with this simple library but remember the challenge will always be there and as mentioned the perfect harmony is **utopia**.
 
@@ -247,7 +208,7 @@ Have a fun with this simple library but remember the challenge will always be th
 :rocket: Type `npm i scss-utopia` is damned **cool**.
 
 # Thanks
-A speical thank for the inspiration and snippets to:
+Special thanks for the inspiration and snippets to:
 
 - [hugogiraudel.com/](https://hugogiraudel.com/) who let me to use his scss snippets
 - [eduardoboucas/include-media](https://github.com/eduardoboucas/include-media) the wonderful library who inspire me to create the structure of the [breakpoints](#breakpoints) and the [react mixin](#use-breakpoints)
@@ -255,6 +216,7 @@ A speical thank for the inspiration and snippets to:
 
 # Contribute
 Feel free to **fork and increase** this repo!
+
 And **let me know** if you find it useful!
 
 Enjoy :punch:
