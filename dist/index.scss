@@ -1,7 +1,6 @@
 @use "sass:list";
 @use "sass:meta";
 @use "sass:map";
-@use "sass:string";
 
 /// https://hugogiraudel.com/2013/10/09/advanced-sass-list-functions-again/
 
@@ -19,22 +18,6 @@
   @return $result;
 }
 
-/// Replace `$search` with `$replace` in `$string`
-/// @author Hugo Giraudel
-/// @param {String} $string - Initial string
-/// @param {String} $search - Substring to replace
-/// @param {String} $replace ('') - New value
-/// @return {String} - Updated string
-
-@function str-replace($string, $search, $replace: '') {
-  $index: str-index($string, $search);
-  
-  @if $index {
-    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
-  }
-  
-  @return $string;
-}
 $defaults: (
   "small": (min-width: 320px), 
   "medium": (min-width: 750px),
@@ -128,19 +111,4 @@ $breakpoints: ()!default;
     @error "Sizes must be <= 4";
   }
   
-}
-
-/// Create static rule
-/// @author Davide Marchet
-/// @param {String} $class - Class name
-/// @param {String} $property - Css property name
-/// @param {List} $sizes - Static values (10, 25, 40, [...])
-/// @param {String} $unit -  Unit
-
-@mixin static($class, $property, $sizes, $unit: 'px') {
-  @each $size in $sizes {
-    .#{$class}-#{str-replace(#{$size}, '.', $replace: '-')} {
-      #{$property}: #{$size}#{$unit};
-    }
-  }
 }

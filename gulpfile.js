@@ -9,8 +9,7 @@ exports.default = function() {
       'src/breakpoints.scss',
       'src/react.scss',
       'src/resp.scss',
-      'src/fluid.scss',
-      'src/static.scss'
+      'src/fluid.scss'
     ])
     .pipe(plugins.concat('index.scss'))
     .pipe(gulp.dest('dist/'))
