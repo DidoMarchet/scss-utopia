@@ -25,10 +25,11 @@ npm i scss-utopia
 
 and include it using an **@import** statement:
 
-``` bash
+``` scss
 @import '~scss-utopia';
-@import 'node_modules/scss-utopia/dist/index.scss';
-[...]
+
+/// @import 'node_modules/scss-utopia/dist/index.scss';
+/// [...]
 ```
 
 # Breakpoints
@@ -36,7 +37,7 @@ First of all we set up the media queries and features **we'll use along all the 
 
 The library comes with a list of [default breakpoints and features](https://github.com/DidoMarchet/scss-utopia/blob/main/src/breakpoints.scss):
 
-```
+``` scss
 $defaults: (
   "small": (min-width: 320px), 
   "medium": (min-width: 750px),
@@ -49,7 +50,7 @@ $defaults: (
 
 Using `$breakpoints` variable in your scss stylesheet you can **easily extend and override** the defaults values adopting **consistent naming convention**:
 
-```
+``` scss
 $breakpoints: (
   "tablet": (min-width: 768px) and (max-width: 1024px),
   "xlarge": (min-width: 1600px),
@@ -60,7 +61,7 @@ $breakpoints: (
 
 The resulting set of values will be the merge of `$defaults` and `$breakpoints` variables:
 
-```
+``` scss
 /*
   "small": (min-width: 320px), 
   "medium": (min-width: 750px),
@@ -76,7 +77,7 @@ The resulting set of values will be the merge of `$defaults` and `$breakpoints` 
 # Use Breakpoints
 Once we have declared all breakpoints we need, we can deliver tailored style to each them using the [react mixin](https://github.com/DidoMarchet/scss-utopia/blob/main/src/react.scss):
 
-```
+``` scss
 @include react('medium'){
   body{
     background: black;
@@ -120,7 +121,7 @@ It takes as parameters:
 
 Other key/values pair has a breakpoints as key and a size as value.
 
-```
+``` scss
 p{
   font-size: 1rem;
   @include resp(
@@ -174,7 +175,7 @@ It takes as parameters:
 - `$property` the name of the css rule;
 - `$sizes...` a list of clamp parameters `(min scaler max, min scaler max, [...])`.
 
-```
+``` scss
 p{
   @include fluid('font-size', 1rem 5vw 3rem);
   @include fluid('margin', 100px 10vw 200px, 150px 25vw 300px);
@@ -200,9 +201,10 @@ p{
 
 # Disclaimer
 [scss-utopia](https://www.npmjs.com/package/scss-utopia) covers a major part of your needs in terms of sizing, positioning and in general aspect.
+
 However the mixins are not ideal to handle rules concerning layout (`grid` properties in particular). 
 
-Have a fun with this simple library but remember the challenge will always be there and as mentioned the perfect harmony is **utopia**.
+As mentioned the perfect harmony is **utopia**.
 
 # Awesome
 :rocket: Type `npm i scss-utopia` is damned **cool**.
