@@ -6,14 +6,14 @@
 /// @require $breakpoints
 
 @mixin react($breakpoint) {
-  $merged: map.merge($defaults, $breakpoints);
-  @if map.has-key($merged, $breakpoint) {
-    @media #{meta.inspect(map.get($merged, $breakpoint))} {
+  $merged: merge($defaults, $breakpoints);
+  @if has-key($merged, $breakpoint) {
+    @media #{inspect(get($merged, $breakpoint))} {
       @content;
     }
   }
   @else {
     @warn "No value could be retrieved from `#{$breakpoint}`. "
-        + "Available breakpoints are: #{map.keys(map.merge($defaults, $breakpoints))}.";
+        + "Available breakpoints are: #{keys(merge($defaults, $breakpoints))}.";
   }
 }

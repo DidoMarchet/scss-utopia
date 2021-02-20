@@ -1,6 +1,6 @@
 {
   "name": "scss-utopia",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "files": [
     "dist"
   ],
@@ -9,8 +9,7 @@
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
-    "gulp-load-plugins": "^2.0.6",
-    "node-sass": "^5.0.0"
+    "gulp-load-plugins": "^2.0.6"
   },
   "scripts": {
     "build": "gulp"

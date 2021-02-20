@@ -8,16 +8,16 @@
   $staticValues: ();
   $minMaxValues: ();
   $clampValues: ();
-  @if list.length($sizes) <= 4 {
+  @if length($sizes) <= 4 {
     @each $size in $sizes {
       $values: ();
   
       @each $value in $size {
-        $values: list.append($values, $value, $separator: comma);
+        $values: append($values, $value, $separator: comma);
       }
-      $staticValues: list.append($staticValues, #{list.nth($values, 3)});
-      $minMaxValues: list.append($minMaxValues, min(max(#{list.nth($values, 1)}, #{list.nth($values, 2)}), #{list.nth($values, 3)}));
-      $clampValues: list.append($clampValues, clamp(#{$values}));
+      $staticValues: append($staticValues, #{nth($values, 3)});
+      $minMaxValues: append($minMaxValues, min(max(#{nth($values, 1)}, #{nth($values, 2)}), #{nth($values, 3)}));
+      $clampValues: append($clampValues, clamp(#{$values}));
     }
   
     #{$property}: $staticValues;
