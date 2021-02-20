@@ -32,7 +32,7 @@ $queries: ()!default;
 
 @mixin react($query) {
   $merged: map-merge($defaults, $queries);
-  @if has-key($merged, $query) {
+  @if map-has-key($merged, $query) {
     @media #{inspect(map-get($merged, $query))} {
       @content;
     }
