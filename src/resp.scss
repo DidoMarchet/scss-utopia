@@ -1,15 +1,32 @@
 /// Create responsive rules based on breakpoints
 /// @author Davide Marchet
-/// @param {String} $property - Css property name
-/// @param {List} $sizes - Key:value list ('small': value, medium: value, [...])
+/// @param {List} $properties - Key:value list, name is required ('name': 'css property', 'small': value, medium: value, [...])
 /// @require react
 
-@mixin resp($property, $sizes) {
-  @each $breakpoint, $size in $sizes {
+@mixin resp($properties...) {
+  $breakpointsList: ();
 
+  @each $property in $properties {
+      $brekpoints: map.remove($property, 'name');
+      @each $brekpoint in map.keys($brekpoints) {
+        $breakpointsList: list.append($breakpointsList, $brekpoint, $separator: comma);
+      }
+  }
+
+  $breakpointsList: remove-duplicates($breakpointsList);
+
+  @each $breakpoint in $breakpointsList {
     @include react(#{$breakpoint}){
-      #{$property}: $size;
+      @each $property in $properties {
+        @if map.has-key($property, 'name') {
+          @if map.has-key($property, $breakpoint) {
+            #{map.get($property, 'name')}: #{map.get($property, $breakpoint)};
+          }
+        }
+        @else {
+          @error "Property 'name' is required.";
+        }
+      }
     }
-
   }
 }

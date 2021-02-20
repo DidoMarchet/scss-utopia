@@ -4,24 +4,28 @@
 /// @param {String} $property - Css property name
 /// @param {List} $sizes - Clamp values (min scaler max, min scaler max, [...])
 
-@mixin fluid($property, $sizes) {
+@mixin fluid($property, $sizes...) {
   $staticValues: ();
   $minMaxValues: ();
   $clampValues: ();
-
-  @each $size in $sizes {
-    $values: ();
-
-    @each $value in $size {
-      $values: list.append($values, $value, $separator: comma);
+  @if list.length($sizes) <= 4 {
+    @each $size in $sizes {
+      $values: ();
+  
+      @each $value in $size {
+        $values: list.append($values, $value, $separator: comma);
+      }
+      $staticValues: list.append($staticValues, #{list.nth($values, 3)});
+      $minMaxValues: list.append($minMaxValues, min(max(#{list.nth($values, 1)}, #{list.nth($values, 2)}), #{list.nth($values, 3)}));
+      $clampValues: list.append($clampValues, clamp(#{$values}));
     }
-
-    $staticValues: list.append($staticValues, #{list.nth($values, 3)});
-    $minMaxValues: list.append($minMaxValues, min(max(#{list.nth($values, 1)}, #{list.nth($values, 2)}), #{list.nth($values, 3)}));
-    $clampValues: list.append($clampValues, clamp(#{$values}));
+  
+    #{$property}: $staticValues;
+    #{$property}: $minMaxValues;
+    #{$property}: $clampValues;
   }
-
-  #{$property}: $staticValues;
-  #{$property}: $minMaxValues;
-  #{$property}: $clampValues;
+  @else {
+    @error "Sizes must be <= 4";
+  }
+  
 }

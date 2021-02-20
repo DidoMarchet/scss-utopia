@@ -7,7 +7,7 @@
 
 @mixin static($class, $property, $sizes, $unit: 'px') {
   @each $size in $sizes {
-    .#{$class}-#{$size} {
+    .#{$class}-#{str-replace(#{$size}, '.', $replace: '-')} {
       #{$property}: #{$size}#{$unit};
     }
   }
