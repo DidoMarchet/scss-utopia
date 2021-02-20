@@ -214,9 +214,9 @@ p{
 ```
 
 # Disclaimer
-[scss-utopia](https://www.npmjs.com/package/scss-utopia) covers the majority of your needs in terms of sizing, positioning and in general aspect.
+[scss-utopia](https://www.npmjs.com/package/scss-utopia) covers **the majority of your needs** in terms of sizing, positioning and in general aspect.
 
-However the mixins are not ideal to handle rules concerning layout (`grid` properties in particular) or adaptive design. 
+However the mixins are **not ideal** to handle rules **concerning layout** (`grid` properties in particular) or **adaptive design**. 
 
 As mentioned the perfect harmony is **utopia**.
 
