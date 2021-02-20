@@ -1,19 +1,18 @@
 /// Original mixins https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/
 
-/// Mixin to manage responsive breakpoints
-/// @author Hugo Giraudel
-/// @param {String} $breakpoint - Breakpoint name
-/// @require $breakpoints
+/// @author Davide Marchet
+/// @param {String} $query - Query name
+/// @require $queries
 
-@mixin react($breakpoint) {
-  $merged: merge($defaults, $breakpoints);
-  @if has-key($merged, $breakpoint) {
-    @media #{inspect(get($merged, $breakpoint))} {
+@mixin react($query) {
+  $merged: map-merge($defaults, $queries);
+  @if has-key($merged, $query) {
+    @media #{inspect(map-get($merged, $query))} {
       @content;
     }
   }
   @else {
-    @warn "No value could be retrieved from `#{$breakpoint}`. "
-        + "Available breakpoints are: #{keys(merge($defaults, $breakpoints))}.";
+    @warn "No value could be retrieved from `#{$query}`. "
+        + "Available queries are: #{map-keys(map-merge($defaults, $queries))}.";
   }
 }

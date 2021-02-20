@@ -4,9 +4,8 @@ const plugins = require('gulp-load-plugins')();
 exports.default = function() {
   return gulp.src(
     [
-      'src/namespaces.scss',
       'src/utils.scss',
-      'src/breakpoints.scss',
+      'src/queries.scss',
       'src/react.scss',
       'src/resp.scss',
       'src/fluid.scss'

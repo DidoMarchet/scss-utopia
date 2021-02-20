@@ -1,26 +1,26 @@
-/// Create responsive rules based on breakpoints
+/// Create responsive rules based on queries
 /// @author Davide Marchet
 /// @param {List} $properties - Key:value list, name is required ('name': 'css property', 'small': value, medium: value, [...])
 /// @require react
 
 @mixin resp($properties...) {
-  $breakpointsList: ();
+  $queriesList: ();
 
   @each $property in $properties {
-      $brekpoints: remove($property, 'name');
-      @each $brekpoint in keys($brekpoints) {
-        $breakpointsList: append($breakpointsList, $brekpoint, $separator: comma);
+      $queries: map-remove($property, 'name');
+      @each $brekpoint in map-keys($queries) {
+        $queriesList: append($queriesList, $brekpoint, $separator: comma);
       }
   }
 
-  $breakpointsList: remove-duplicates($breakpointsList);
+  $queriesList: remove-duplicates($queriesList);
 
-  @each $breakpoint in $breakpointsList {
-    @include react(#{$breakpoint}){
+  @each $query in $queriesList {
+    @include react(#{$query}){
       @each $property in $properties {
-        @if has-key($property, 'name') {
-          @if has-key($property, $breakpoint) {
-            #{get($property, 'name')}: #{get($property, $breakpoint)};
+        @if map-has-key($property, 'name') {
+          @if map-has-key($property, $query) {
+            #{map-get($property, 'name')}: #{map-get($property, $query)};
           }
         }
         @else {

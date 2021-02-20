@@ -1,7 +1,3 @@
-@use "sass:list";
-@use "sass:meta";
-@use "sass:map";
-
 /// https://hugogiraudel.com/2013/10/09/advanced-sass-list-functions-again/
 
 @function remove-duplicates($list, $recursive: false) {  
@@ -27,50 +23,49 @@ $defaults: (
   "touch": (pointer: coarse) and (hover: none)
 );
 
-$breakpoints: ()!default;
+$queries: ()!default;
 /// Original mixins https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/
 
-/// Mixin to manage responsive breakpoints
-/// @author Hugo Giraudel
-/// @param {String} $breakpoint - Breakpoint name
-/// @require $breakpoints
+/// @author Davide Marchet
+/// @param {String} $query - Query name
+/// @require $queries
 
-@mixin react($breakpoint) {
-  $merged: merge($defaults, $breakpoints);
-  @if has-key($merged, $breakpoint) {
-    @media #{inspect(get($merged, $breakpoint))} {
+@mixin react($query) {
+  $merged: map-merge($defaults, $queries);
+  @if has-key($merged, $query) {
+    @media #{inspect(map-get($merged, $query))} {
       @content;
     }
   }
   @else {
-    @warn "No value could be retrieved from `#{$breakpoint}`. "
-        + "Available breakpoints are: #{keys(merge($defaults, $breakpoints))}.";
+    @warn "No value could be retrieved from `#{$query}`. "
+        + "Available queries are: #{map-keys(map-merge($defaults, $queries))}.";
   }
 }
 
-/// Create responsive rules based on breakpoints
+/// Create responsive rules based on queries
 /// @author Davide Marchet
 /// @param {List} $properties - Key:value list, name is required ('name': 'css property', 'small': value, medium: value, [...])
 /// @require react
 
 @mixin resp($properties...) {
-  $breakpointsList: ();
+  $queriesList: ();
 
   @each $property in $properties {
-      $brekpoints: remove($property, 'name');
-      @each $brekpoint in keys($brekpoints) {
-        $breakpointsList: append($breakpointsList, $brekpoint, $separator: comma);
+      $queries: map-remove($property, 'name');
+      @each $brekpoint in map-keys($queries) {
+        $queriesList: append($queriesList, $brekpoint, $separator: comma);
       }
   }
 
-  $breakpointsList: remove-duplicates($breakpointsList);
+  $queriesList: remove-duplicates($queriesList);
 
-  @each $breakpoint in $breakpointsList {
-    @include react(#{$breakpoint}){
+  @each $query in $queriesList {
+    @include react(#{$query}){
       @each $property in $properties {
-        @if has-key($property, 'name') {
-          @if has-key($property, $breakpoint) {
-            #{get($property, 'name')}: #{get($property, $breakpoint)};
+        @if map-has-key($property, 'name') {
+          @if map-has-key($property, $query) {
+            #{map-get($property, 'name')}: #{map-get($property, $query)};
           }
         }
         @else {
