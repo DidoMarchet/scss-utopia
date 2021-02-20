@@ -117,7 +117,6 @@ The mixin take as parameters a list that contains key/values pair.
 
 Other keys are the values of breakpoint we have declared with the relative value of the css property.
 
-
 ```
 p{
   font-size: 1rem;
@@ -161,5 +160,38 @@ p{
   }
 */
 ```
- 
+
+# Automate fluid rules
+Now it's time to leave responsive behaviour and **linearly scale rules** between a set of minimum and maximum sizes.
+
+The [fluid mixin](https://github.com/DidoMarchet/scss-utopia/blob/main/src/fluid.scss) is based on [clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/clamp()) css function and also provide a fallback for browsers don't support modern css solutions.
+
+It takes as parameters:
+
+- `$property` the name of the fluid property
+- `$sizes...` a list of clamp parameters (min, scaler, max) comma separated.
+
+```
+p{
+  @include fluid('font-size', 1rem 5vw 3rem);
+  @include fluid('margin', 100px 10vw 200px, 150px 25vw 300px);
+  @include fluid('padding', 100px 10vw 200px, 150px 25vw 300px, 100px 10vw 200px, 150px 25vw 300px);
+}
+
+/*
+  Will generate:
+
+  p {
+    font-size: 3rem;
+    font-size: min(max(1rem, 5vw), 3rem);
+    font-size: clamp(1rem, 5vw, 3rem);
+    margin: 200px 300px;
+    margin: min(max(100px, 10vw), 200px) min(max(150px, 25vw), 300px);
+    margin: clamp(100px, 10vw, 200px) clamp(150px, 25vw, 300px);
+    padding: 200px 300px 200px 300px;
+    padding: min(max(100px, 10vw), 200px) min(max(150px, 25vw), 300px) min(max(100px, 10vw), 200px) min(max(150px, 25vw), 300px);
+    padding: clamp(100px, 10vw, 200px) clamp(150px, 25vw, 300px) clamp(100px, 10vw, 200px) clamp(150px, 25vw, 300px);
+  }
+*/
+```
 
