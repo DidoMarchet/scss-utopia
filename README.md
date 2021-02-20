@@ -238,5 +238,10 @@ It takes as parameters:
 
 :warning: At this point **I was lazy** and I don't care about shorthand property such as `margin: 25px 50px` or `margin: 25px 50px 25px 50px` 🙏
 
+# Disclaimer
+[scss-utopia](https://www.npmjs.com/package/scss-utopia) cover a major part of your needs but with limitations. 
 
+Have a fun with this simple library but remember the challenge will always be there and as mentioned the perfect harmony is **utopia**.
 
+# Awesome
+:rocket: Type `npm i scss-utopia` is damned **cool**.
