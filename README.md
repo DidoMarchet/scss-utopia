@@ -230,7 +230,7 @@ Special thanks for the inspiration and snippets to:
 
 - [hugogiraudel.com/](https://hugogiraudel.com/) who let me to use **his scss snippets** useful for [react mixin](https://github.com/DidoMarchet/scss-utopia/blob/main/src/react.scss) [and manage array](https://github.com/DidoMarchet/scss-utopia/blob/main/src/utils.scss)
 - [eduardoboucas/include-media](https://github.com/eduardoboucas/include-media/) the **wonderful library** who inspire me to create the structure of the [breakpoints](#breakpoints) and the [react mixin](#use-breakpoints)
-- [www.bronco.co.uk/our-ideas/creating-a-clamp-fallback-function-in-sass-scss/](https://www.bronco.co.uk/our-ideas/creating-a-clamp-fallback-function-in-sass-scss/) who **lay the faundation** to create the [fluid mixin](#automate-fluid-rules)
+- [www.bronco.co.uk/our-ideas/creating-a-clamp-fallback-function-in-sass-scss/](https://www.bronco.co.uk/our-ideas/creating-a-clamp-fallback-function-in-sass-scss/) who **lay the foundation** to create the [fluid mixin](#automate-fluid-rules)
 
 # Contribute
 Feel free to **fork and increase** this repo!
