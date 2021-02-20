@@ -90,18 +90,18 @@ a{
 }
 
 /*
-Will generate 
+  Will generate 
 
-@media (min-width: 750px)
-  body {
-    background: black;
+  @media (min-width: 750px)
+    body {
+      background: black;
+    }
   }
-}
-@media (hover: hover)
-  a:hover {
-    color: red;
+  @media (hover: hover)
+    a:hover {
+      color: red;
+    }
   }
-}
 */
 ```
 
