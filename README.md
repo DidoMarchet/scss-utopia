@@ -10,8 +10,8 @@
 :waning_gibbous_moon: For that purpose [scss-utopia](https://www.npmjs.com/package/scss-utopia) was created: covering **most developer needs**  in terms of typography, spacing and sizes ([...]) in the simplest and automated possible way!
 
 ### Table of content:
-- [Queries](#breakpoints)
-- [Use Queries](#use-breakpoints)
+- [Queries](#queries)
+- [Use Queries](#use-queries)
 - [Automate responsive rules](#automate-responsive-rules)
 - [Automate fluid rules](#automate-fluid-rules)
 - [Disclaimer](#disclaimer)
@@ -34,10 +34,10 @@ and include it using an **@import** statement:
 /// [...]
 ```
 
-# Breakpoints
+# Queries
 First of all we set up the media queries and features **we'll use along all the application**.
 
-The library comes with a list of [default queries and features](https://github.com/DidoMarchet/scss-utopia/blob/main/src/breakpoints.scss):
+The library comes with a list of [default queries and features](https://github.com/DidoMarchet/scss-utopia/blob/main/src/queries.scss):
 
 ``` scss
 $defaults: (
@@ -76,7 +76,7 @@ The resulting set of values will be the merge of `$defaults` and `$queries` vari
 */
 ```
 
-# Use Breakpoints
+# Use Queries
 Once we have declared all the queries we need, we can deliver tailored style to each them using the [react mixin](https://github.com/DidoMarchet/scss-utopia/blob/main/src/react.scss):
 
 ``` scss
@@ -229,7 +229,7 @@ As mentioned the perfect harmony is **utopia**.
 Special thanks for the inspiration and snippets to:
 
 - [hugogiraudel.com/](https://hugogiraudel.com/) who let me to use **his scss snippets** useful for [react mixin](https://github.com/DidoMarchet/scss-utopia/blob/main/src/react.scss) [and manage array](https://github.com/DidoMarchet/scss-utopia/blob/main/src/utils.scss)
-- [eduardoboucas/include-media](https://github.com/eduardoboucas/include-media/) the **wonderful library** who inspire me to create the structure of the [breakpoints](#breakpoints) and the [react mixin](#use-breakpoints)
+- [eduardoboucas/include-media](https://github.com/eduardoboucas/include-media/) the **wonderful library** who inspire me to create the structure of the [queries](#queries) and the [react mixin](#use-queries)
 - [www.bronco.co.uk/our-ideas/creating-a-clamp-fallback-function-in-sass-scss/](https://www.bronco.co.uk/our-ideas/creating-a-clamp-fallback-function-in-sass-scss/) who **lay the foundation** to create the [fluid mixin](#automate-fluid-rules)
 
 # Contribute
