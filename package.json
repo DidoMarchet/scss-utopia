@@ -8,24 +8,21 @@
   "style": "./dist/index.scss",
   "devDependencies": {
     "gulp": "^4.0.2",
-    "gulp-load-plugins": "^1.4.0",
-    "gulp-concat": "^2.5.2"
+    "gulp-load-plugins": "^2.0.6",
+    "gulp-concat": "^2.6.1"
   },
   "scripts": {
     "build": "gulp"
   },
   "keywords": [
     "Scss",
-    "Scss helpers",
-    "Scss tools",
     "Scss mixins",
-    "Scss utilities",
+    "Scss tools",
+    "Scss breakpoints",
     "Scss fluid",
-    "Scss responsive",
-    "Scss breakpoint",
-    "Scss static"
+    "Scss responsive"
   ],
-  "description": "Useful Scss mixins to manage fluid, responsive and static Css properties",
+  "description": "Three scss mixins to quickly master responsive and fluid content and to make it look good on any screen.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DidoMarchet/scss-utopia.git"
