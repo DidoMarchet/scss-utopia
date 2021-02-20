@@ -111,7 +111,7 @@ a{
 At this point we have all instruments to handle the responsive behaviour of our styles.
 With [resp mixin](https://github.com/DidoMarchet/scss-utopia/blob/main/src/resp.scss) we can generate quickly responsive rules.
 
-The mixin take as parameters a list that contains key/values pair.
+The mixin take as parameters a list that contains **key/values pair**.
 
 :warning: `name` is the required for each element and its value is the name of the css property (e.g. font-size, padding, margin...)
 
