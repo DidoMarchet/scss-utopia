@@ -10,8 +10,8 @@
 :waning_gibbous_moon: For that purpose [scss-utopia](https://www.npmjs.com/package/scss-utopia) was created: covering **most developer needs**  in terms of typography, spacing and sizes ([...]) in the simplest and automated possible way!
 
 ### Table of content:
-- [Breakpoints](#breakpoints)
-- [Use Breakpoints](#use-breakpoints)
+- [Queries](#breakpoints)
+- [Use Queries](#use-breakpoints)
 - [Automate responsive rules](#automate-responsive-rules)
 - [Automate fluid rules](#automate-fluid-rules)
 - [Disclaimer](#disclaimer)
@@ -37,7 +37,7 @@ and include it using an **@import** statement:
 # Breakpoints
 First of all we set up the media queries and features **we'll use along all the application**.
 
-The library comes with a list of [default breakpoints and features](https://github.com/DidoMarchet/scss-utopia/blob/main/src/breakpoints.scss):
+The library comes with a list of [default queries and features](https://github.com/DidoMarchet/scss-utopia/blob/main/src/breakpoints.scss):
 
 ``` scss
 $defaults: (
@@ -50,10 +50,10 @@ $defaults: (
 );
 ```
 
-Using `$breakpoints` variable in your scss stylesheet you can **easily extend and override** the default values adopting **consistent naming convention**:
+Using `$queries` variable in your scss stylesheet you can **easily extend and override** the default values adopting **consistent naming convention**:
 
 ``` scss
-$breakpoints: (
+$queries: (
   "tablet": (min-width: 768px) and (max-width: 1024px),
   "xlarge": (min-width: 1600px),
   "xlarge-retina": (-webkit-min-device-pixel-ratio: 2) and (min-width: 1300px)
@@ -61,7 +61,7 @@ $breakpoints: (
 );
 ```
 
-The resulting set of values will be the merge of `$defaults` and `$breakpoints` variables:
+The resulting set of values will be the merge of `$defaults` and `$queries` variables:
 
 ``` scss
 /*
@@ -77,7 +77,7 @@ The resulting set of values will be the merge of `$defaults` and `$breakpoints` 
 ```
 
 # Use Breakpoints
-Once we have declared all the breakpoints we need, we can deliver tailored style to each them using the [react mixin](https://github.com/DidoMarchet/scss-utopia/blob/main/src/react.scss):
+Once we have declared all the queries we need, we can deliver tailored style to each them using the [react mixin](https://github.com/DidoMarchet/scss-utopia/blob/main/src/react.scss):
 
 ``` scss
 @include react('medium'){
@@ -127,7 +127,7 @@ takes as parameters:
 
 :warning: Key `name` is the name of css rule and it's required for each element.
 
-Other key/values pair have a breakpoint as key and a size as value.
+Other key/values pair have a query as key and a size as value.
 
 ``` scss
 p{
