@@ -115,7 +115,7 @@ With [resp mixin](https://github.com/DidoMarchet/scss-utopia/blob/main/src/resp.
 
 It takes as parameters:
 
-- '$properties...' a list that contains **key/values pair**. 
+- `$properties...` a list that contains **key/values pair**. 
 
 :warning: Key `name` is the name of css rule and it's required for each element.
 
