@@ -94,10 +94,10 @@ $queries: ()!default;
         $values: append($values, $value, $separator: comma);
       }
       $staticValues: append($staticValues, #{nth($values, 3)});
-      $minMaxValues: append($minMaxValues, min(max(#{nth($values, 1)}, #{nth($values, 2)}), #{nth($values, 3)}));
+      $minMaxValues: append($minMaxValues, #{"min(max(#{nth($values, 1)}, #{nth($values, 2)}), #{nth($values, 3)})"});
       $clampValues: append($clampValues, clamp(#{$values}));
     }
-  
+    
     #{$property}: $staticValues;
     #{$property}: $minMaxValues;
     #{$property}: $clampValues;
