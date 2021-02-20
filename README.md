@@ -254,8 +254,7 @@ A speical thank for the inspiration and snippets to:
 - [www.bronco.co.uk/our-ideas/creating-a-clamp-fallback-function-in-sass-scss/](https://www.bronco.co.uk/our-ideas/creating-a-clamp-fallback-function-in-sass-scss/) who inspire me to create the [fluid mixin](#automate-fluid-rules)
 
 # Contribute
-Feel free to fork and increase this repo!
-
-And let me now if you find it useful!
+Feel free to **fork and increase** this repo!
+And **let me know** if you find it useful!
 
 Enjoy :punch:
