@@ -1,4 +1,4 @@
-# scss-utopia: quickly master scss  responsive and fluid rules 
+# scss-utopia
 
 :book: From [https://en.wiktionary.org/wiki/utopia](https://en.wiktionary.org/wiki/utopia)
 > **utopia**
@@ -216,7 +216,7 @@ p{
 # Disclaimer
 [scss-utopia](https://www.npmjs.com/package/scss-utopia) covers the majority of your needs in terms of sizing, positioning and in general aspect.
 
-However the mixins are not ideal to handle rules concerning layout (`grid` properties in particular). 
+However the mixins are not ideal to handle rules concerning layout (`grid` properties in particular) or adaptive design. 
 
 As mentioned the perfect harmony is **utopia**.
 
@@ -226,9 +226,9 @@ As mentioned the perfect harmony is **utopia**.
 # Thanks
 Special thanks for the inspiration and snippets to:
 
-- [hugogiraudel.com/](https://hugogiraudel.com/) who let me to use his scss snippets
-- [eduardoboucas/include-media](https://github.com/eduardoboucas/include-media) the wonderful library who inspire me to create the structure of the [breakpoints](#breakpoints) and the [react mixin](#use-breakpoints)
-- [www.bronco.co.uk/our-ideas/creating-a-clamp-fallback-function-in-sass-scss/](https://www.bronco.co.uk/our-ideas/creating-a-clamp-fallback-function-in-sass-scss/) who inspire me to create the [fluid mixin](#automate-fluid-rules)
+- [hugogiraudel.com/](https://hugogiraudel.com/) who let me to use **his scss snippets** useful for [react mixin](https://github.com/DidoMarchet/scss-utopia/blob/main/src/react.scss) [and manage array](https://github.com/DidoMarchet/scss-utopia/blob/main/src/utils.scss)
+- [eduardoboucas/include-media](https://github.com/eduardoboucas/include-media) the **wonderful library** who inspire me to create the structure of the [breakpoints](#breakpoints) and the [react mixin](#use-breakpoints)
+- [www.bronco.co.uk/our-ideas/creating-a-clamp-fallback-function-in-sass-scss/](https://www.bronco.co.uk/our-ideas/creating-a-clamp-fallback-function-in-sass-scss/) who **lay the faundation** to create the [fluid mixin](#automate-fluid-rules)
 
 # Contribute
 Feel free to **fork and increase** this repo!
