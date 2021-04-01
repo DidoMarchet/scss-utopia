@@ -1,4 +1,4 @@
-# scss-utopia
+# scss-utopia: save time, build fast (almost everything)
 
 :book: From [https://en.wiktionary.org/wiki/utopia](https://en.wiktionary.org/wiki/utopia)
 > **utopia**
