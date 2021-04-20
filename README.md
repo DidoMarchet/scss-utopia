@@ -212,6 +212,47 @@ p{
   }
 */
 ```
+:tractor: **Boosted allowing the use of fluid and static values together:**
+
+``` scss
+p{
+  // rules: static static
+  @include fluid('padding', 20px, 20px);
+  // rules: fluid static
+  @include fluid('padding', 100px 10vw 200px, 20px);
+  // rules: fluid static fluid
+  @include fluid('padding', 100px 10vw 200px, 20px, 100px 10vw 200px);
+  // rules: static fluid static
+  @include fluid('padding', 20px, 100px 10vw 200px, 20px);
+  /// [ ...other rules ]
+}
+
+/*
+  Will generate:
+  
+  p {
+    // rules: static static
+    padding: 20px 20px;
+    padding: 20px 20px;
+    padding: 20px 20px;
+    
+    // rules: fluid static
+    padding: 200px 20px;
+    padding: min(max(100px, 10vw), 200px) 20px;
+    padding: clamp(100px, 10vw, 200px) 20px;
+    
+    // rules: fluid static fluid
+    padding: 200px 20px 200px;
+    padding: min(max(100px, 10vw), 200px) 20px min(max(100px, 10vw), 200px);
+    padding: clamp(100px, 10vw, 200px) 20px clamp(100px, 10vw, 200px);
+    
+    // rules: static fluid static
+    padding: 20px 200px 20px;
+    padding: 20px min(max(100px, 10vw), 200px) 20px;
+    padding: 20px clamp(100px, 10vw, 200px) 20px;
+  }
+*/
+```
 
 # Disclaimer
 [scss-utopia](https://www.npmjs.com/package/scss-utopia) covers **the majority of your needs** in terms of sizing, positioning and in general aspect.
