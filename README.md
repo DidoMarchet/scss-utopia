@@ -193,7 +193,7 @@ takes as parameters:
 p{
   @include fluid('font-size', 1rem 5vw 3rem);
   @include fluid('margin', 100px 10vw 200px, 150px 25vw 300px);
-  @include fluid('padding', 100px 10vw 200px, 150px 25vw 300px, 100px 10vw 200px, 150px 25vw 300px);
+  @include fluid('padding', 100px 10vw 200px, 20px, 100px 10vw 200px);
 }
 
 /*
@@ -206,9 +206,9 @@ p{
     margin: 200px 300px;
     margin: min(max(100px, 10vw), 200px) min(max(150px, 25vw), 300px);
     margin: clamp(100px, 10vw, 200px) clamp(150px, 25vw, 300px);
-    padding: 200px 300px 200px 300px;
-    padding: min(max(100px, 10vw), 200px) min(max(150px, 25vw), 300px) min(max(100px, 10vw), 200px) min(max(150px, 25vw), 300px);
-    padding: clamp(100px, 10vw, 200px) clamp(150px, 25vw, 300px) clamp(100px, 10vw, 200px) clamp(150px, 25vw, 300px);
+    padding: 200px 20px 200px;
+    padding: min(max(100px, 10vw), 200px) 20px min(max(100px, 10vw), 200px);
+    padding: clamp(100px, 10vw, 200px) 20px clamp(100px, 10vw, 200px);
   }
 */
 ```
