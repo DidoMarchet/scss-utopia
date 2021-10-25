@@ -1,17 +1,3 @@
-@use "sass:math";
-/// Original mixins https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/
-
-@function clamping($minSize, $maxSize, $minLimit, $maxLimit, $sizeUnit: 'rem', $limitUnit: 'rem') {  
-  $minSizeRem: rem($minSize);
-  $maxSizeRem: rem($maxSize);
-  $minLimitRem: rem($minLimit);
-  $maxLimitRem: rem($maxLimit);
-
-  $slope: math.div(num($maxSizeRem) - num($minSizeRem), num($minLimitRem) - num($maxLimitRem));
-  $intersection: $slope;
-
-  @return $slope;
-}
 // ____________________________________________________________________________
 //
 //    Sass Unit Converter v.2.5.0
@@ -739,4 +725,19 @@ $queries: ()!default;
   @else {
     @error "Sizes must be <= 4";
   }
+}
+
+
+/// Original mixins https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/
+
+@function clamping($minSize, $maxSize, $minLimit, $maxLimit, $unit: 'px') {  
+  $minSizeRem: rem($minSize);
+  $maxSizeRem: rem($maxSize);
+  $minLimitRem: rem($minLimit);
+  $maxLimitRem: rem($maxLimit);
+
+  $slope: math-div(num($maxSizeRem) - num($minSizeRem), num($minLimitRem) - num($maxLimitRem));
+  $intersection: $slope;
+
+  @return $minSizeRem;
 }

@@ -1,7 +1,7 @@
 
 /// Original mixins https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/
 
-@function clamping($minSize, $maxSize, $minLimit, $maxLimit, $sizeUnit: 'rem', $limitUnit: 'rem') {  
+@function clamping($minSize, $maxSize, $minLimit, $maxLimit, $unit: 'px') {  
   $minSizeRem: rem($minSize);
   $maxSizeRem: rem($maxSize);
   $minLimitRem: rem($minLimit);
@@ -10,5 +10,5 @@
   $slope: math-div(num($maxSizeRem) - num($minSizeRem), num($minLimitRem) - num($maxLimitRem));
   $intersection: $slope;
 
-  @return $slope;
+  @return $minSizeRem;
 }
