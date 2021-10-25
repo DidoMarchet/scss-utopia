@@ -32,5 +32,8 @@
   "bugs": {
     "url": "https://github.com/DidoMarchet/scss-utopia/issues"
   },
-  "homepage": "https://github.com/DidoMarchet/scss-utopia#readme"
+  "homepage": "https://github.com/DidoMarchet/scss-utopia#readme",
+  "dependencies": {
+    "sass-unitconverter": "^2.5.2"
+  }
 }

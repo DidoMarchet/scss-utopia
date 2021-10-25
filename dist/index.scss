@@ -1,3 +1,640 @@
+@use "sass:math";
+/// Original mixins https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/
+
+@function clamping($minSize, $maxSize, $minLimit, $maxLimit, $sizeUnit: 'rem', $limitUnit: 'rem') {  
+  $minSizeRem: rem($minSize);
+  $maxSizeRem: rem($maxSize);
+  $minLimitRem: rem($minLimit);
+  $maxLimitRem: rem($maxLimit);
+
+  $slope: math.div(num($maxSizeRem) - num($minSizeRem), num($minLimitRem) - num($maxLimitRem));
+  $intersection: $slope;
+
+  @return $slope;
+}
+// ____________________________________________________________________________
+//
+//    Sass Unit Converter v.2.5.0
+//    npm install sass-unitconverter
+//    Based on https://github.com/jakob-e/unitconversion
+// ____________________________________________________________________________
+//
+//   Function               Input units
+//
+//   Absolute length
+//   px(input, options);        px, pt, pc, mm, cm, in, em, rem, vw, vh, vmin, vmax, number
+//   pt(input, options);        px, pt, pc, mm, cm, in, em, rem, vw, vh, vmin, vmax, number
+//   pc(input, options);        px, pt, pc, mm, cm, in, em, rem, vw, vh, vmin, vmax, number
+//   mm(input, options);        px, pt, pc, mm, cm, in, em, rem, vw, vh, vmin, vmax, number
+//   cm(input, options);        px, pt, pc, mm, cm, in, em, rem, vw, vh, vmin, vmax, number
+//   in(input, options);        px, pt, pc, mm, cm, in, em, rem, vw, vh, vmin, vmax, number
+//
+//   Relative length
+//   em(input,  options);       px, pt, pc, mm, cm, in, em, rem, vw, vh, vmin, vmax, number
+//   rem(input, options);       px, pt, pc, mm, cm, in, em, rem, vw, vh, vmin, vmax, number
+//   ex(input, options);        ex, number
+//   ch(input, options);        ch, number
+//   vw(input, options);        px, pt, pc, mm, cm, in, em, rem, vw, vh, vmin, vmax, number
+//   vh(input, options);        px, pt, pc, mm, cm, in, em, rem, vw, vh, vmin, vmax, number
+//   vmin(input, options);      px, pt, pc, mm, cm, in, em, rem, vw, vh, vmin, vmax, number
+//   vmax(input, options);      px, pt, pc, mm, cm, in, em, rem, vw, vh, vmin, vmax, number
+//
+//   Angle
+//   deg(input, options);       deg, rad, grad, turn, number
+//   rad(input, options);       deg, rad, grad, turn, number
+//   grad(input, options);      deg, rad, grad, turn, number
+//   turn(input, options);      deg, rad, grad, turn, number
+//
+//   Time
+//   s(input, options);         s, ms, number
+//   ms(input, options);        s, ms, number
+//
+//   Frequency
+//   hz(input, options);        hz, khz, number
+//   khz(input, options);       hz, khz, number
+//
+//   Resolution
+//   dpi(input, options);       dpi, dpcm, dppx, number
+//   dpcm(input, options);      dpi, dpcm, dppx, number
+//   dppx(input, options);      dpi, dpcm, dppx, number
+//
+//   String
+//   str(input);                anything not null
+//
+//   Number, int and uint
+//   num(input);                px, pt, pc, mm, cm, in, em, rem, ex, ch,
+//                              vw, vh, vmin, vmax, deg, rad, grad, turn,
+//                              dpi, dpcm, dppx, s, ms, hz, khz, number, string
+//   int(input);                as number
+//   uint(input);               as number
+//
+//   ratio                      number to fraction
+//
+//   ETC Convert
+//   one-unit(input);           px, pt, pc, mm, cm, in, em, rem, ex, ch,
+//                              vw, vh, vmin, vmax, deg, rad, grad, turn,
+//                              dpi, dpcm, dppx, s, ms, hz, khz, number
+//   to-unit(input, unit);      same
+//   to-unit-list(list, unit);  same as list
+//   to-unit-map(map, unit);    same as map
+//
+//   is-[unit](input)           each unit
+//   is-num(input, strict)      strict: true(default) => pure number
+//                                      false         => type-is number
+//   is-null(input, strict)     strict: true(default) => pure null
+//                                      false         => null, length is 0(list, map, string)
+//   is-exist(input, strict)    strict: true(default) => pure exist
+//                                      false         => exist, not false
+//   is-equal(inputA, inputB)   anything
+//
+//   Aliases
+//   string(input);
+//   number(input);
+//   is-percent(input);
+//   is-string(input);
+//   is-length(input);
+//   is-number(input, strict);
+//
+//   Options
+//   root-size:                 px, pt, pc, mm, cm, in, em, rem
+//   base-size:                 px, pt, pc, mm, cm, in, em, rem
+//   unit-width:                px, pt, pc, mm, cm, in, em, rem
+//   unit-height:               px, pt, pc, mm, cm, in, em, rem
+//   check-callback:            Function Name of
+//                              (input, unit, Options) => Boolean
+//
+// ____________________________________________________________________________
+
+// == Base =====================================================================
+// Base font size in pixel for converting em and rem to absolute lengths.
+$root-font-size: 16px            !default;
+$base-font-size: $root-font-size !default;
+$unit-width:     1200px          !default;
+$unit-height:    800px           !default;
+$check-callback: null            !default;
+
+@function n-units($number) {
+  @return (
+    // absolute length
+    px: $number * 1px, pt: $number * 1pt, pc: $number * 1pc,
+    mm: $number * 1mm, cm: $number * 1cm, in: $number * 1in,
+
+    // relative length - font based
+    em: $number * 1em, rem: $number * 1rem,
+    ch: $number * 1ch,  ex: $number * 1ex,
+
+    // relative length - viewport based
+    vw:   $number * 1vw,     vh: $number * 1vh,
+    vmin: $number * 1vmin, vmax: $number * 1vmax,
+
+    // angle
+    deg:  $number * 1deg,   rad: $number * 1rad,
+    grad: $number * 1grad, turn: $number * 1turn,
+
+    // time
+    s: $number * 1s, ms: $number * 1ms,
+
+    // frequency
+    hz: $number * 1Hz, khz: $number * 1kHz,
+    Hz: $number * 1Hz, kHz: $number * 1kHz,
+
+    // resolution
+    dppx: $number * 1dppx, dpcm: $number * 1dpcm, dpi: $number * 1dpi,
+
+    // percent or number
+    "%": $number * 1%, pct:    $number * 1%, percent: $number * 1%,
+    num: $number * 1,  number: $number * 1
+  );
+}
+
+// == Option ===================================================================
+@function unit-global-options() {
+  $global-options:(
+//  Global Name Global Variable
+    root-size:  $root-font-size,
+    base-size:  $base-font-size,
+    width:      $unit-width,
+    height:     $unit-height,
+    callback:   $check-callback,
+  );
+  @return $global-options;
+}
+
+// Mapping with Scoped Options
+$unit-options-map: (
+//Scoped Name  Global Name.
+  root:        root-size,
+  root-size:   root-size,
+  size-root:   root-size,
+  base:        base-size,
+  base-size:   base-size,
+  size-base:   base-size,
+  width:       width,
+  width-size:  width,
+  size-width:  width,
+  height:      height,
+  height-size: height,
+  size-height: height,
+  callback:    callback,
+) !default;
+
+// Get Global Named Scoped Option
+@function unit-scoped-convert($scoped-options) {
+  @if length($scoped-options) == 0 {
+    @return ();
+  }
+
+  $result: ();
+  @each $key, $value in $scoped-options {
+    $global-key: map-get($unit-options-map, $key);
+    $result:     map-merge($result, ($global-key: $value));
+  }
+  @return $result;
+}
+
+// Get Global Name
+@function unit-name-convert($name) {
+  $result: ();
+  @if is-list($name) {
+    @each $key in $name {
+      $global-key: map-get($unit-options-map, $key);
+      $result:     append($result, $global-key);
+    }
+  }
+  @else {
+    $result: map-get($unit-options-map, $name);
+  }
+  @return $result;
+}
+
+// Get Option Single Value
+@function unit-get-option-value($scoped, $name) {
+  @return if(map-has-key($scoped, $name),
+  map-get($scoped, $name),
+  map-get(unit-global-options(), $name));
+}
+
+// Get Option Value
+@function unit-get-option($options: (), $name: all) {
+  $scoped: unit-scoped-convert($options);
+  $result: ();
+
+  @if $name == all {
+    $result: map-merge(unit-global-options(), $scoped);
+  }
+  @else {
+    $name: unit-name-convert($name);
+
+    @if is-list($name) {
+      @each $option in $name {
+        $value:  unit-get-option-value($scoped, $option);
+        $result: append($result, $value);
+      }
+    }
+    @else {
+      $result: unit-get-option-value($scoped, $name);
+    }
+  }
+  @return $result;
+}
+
+// == Conversion ===============================================================
+// Get unit
+@function get-unit($input) {
+  $type: type-of($input);
+  @if $type == 'number' {
+    $unit: unit($input);
+    @return if($unit == '', 'num', $unit);
+  }
+  @return $type;
+}
+
+// Get 1size of value
+@function one-unit($input) {
+  $type: type-of($input);
+  @if $type == 'number' {
+    @return ($input / num($input));
+  }
+  @if $type != 'string' {
+    @error 'Value for `unit` should be a number or string.';
+  }
+
+  $units: n-units(1);
+  $parsed-unit: false;
+
+  @each $unit in $units {
+    // str-index - find substring in a string
+    // 'px' in '10px' for example
+
+    // $unit is a pair of ['px': 1px] (item in $units)
+    // nth(['px': 1px], 1) returns 'px'
+    // nth(['px': 1px], 2) returns 1px
+
+    @if (str-index($input, nth($unit, 1))) {
+      $parsed-unit: nth($unit, 2);
+    }
+  }
+
+  @if (not $parsed-unit) {
+    @error 'Invalid unit `#{$input}` – must be a valid CSS unit';
+  }
+
+  @return $parsed-unit;
+}
+
+// Get break
+@function get-break($unit, $width, $height, $options) {
+  $width:  if(is-null($width),  null, px($width, $options));
+  $height: if(is-null($height), null, px($height, $options));
+
+  @if $unit == vw {
+    @return $width;
+  }
+  @if $unit == vh {
+    @return $height;
+  }
+  @if $unit == vmin {
+    @return min($width, $height);
+  }
+  @if $unit == vmax {
+    @return max($width, $height);
+  }
+}
+
+// Conversion function
+@function to-unit($input, $unit, $options: ()) {
+  // Get Options
+  $root-size: unit-get-option($options, root-size);
+  $base-size: unit-get-option($options, base-size);
+  $width:     unit-get-option($options, width);
+  $height:    unit-get-option($options, height);
+  $callback:  unit-get-option($options, callback);
+
+  // Check if convertable
+  $callback-args: ($input $unit $options);
+  @if (not is-null($callback)) and (not call($callback, $callback-args...)) {
+    @return $input;
+  }
+
+  // Test against valid CSS units
+  $units: n-units(0);
+  $to-unit: map-get($units, $unit);
+
+  // Error handling – wrong $unit
+  // Incomparable units are caught in convertion
+  @if not $to-unit {
+    @error 'Could not convert to `#{$unit}` – must be a valid CSS unit';
+    @return null;
+  }
+
+  // Number/incomparable conversion
+  @if index(num number ex ch, $unit) {
+    $value: num($input);
+  }
+
+  // $input is VW, VH, VMIN, VMAX using px as base
+  @if index(vw vh vmin vmax, unit($input)) {
+    $break: get-break(unit($input), $width, $height, $options);
+    $input: ($break * num($input)) / 100;
+  }
+
+  // $unit is VW, VH, VMIN, VNAX using px as base
+  @if index(vw vh vmin vmax, $unit) and not index(num number, unit($input)) {
+    $break: num(get-break($unit, $width, $height, $options));
+    $input: num(px($input, $options));
+    $input: if($break == 0, 0,
+    ($input / $break) * 100);
+  }
+
+  // EM convertion using px as base
+  @if index(em, unit($input)) {
+    $input: 0px + num($input) * $base-size/1px;
+  }
+  @if index(em, $unit) and not unitless($input) {
+    $input: 0px + px($input);
+    $input: num($input) * 1px/$base-size;
+  }
+
+  // REM convertion using px as base
+  @if index(rem, unit($input)) {
+    $input: 0px + num($input) * $root-size/1px;
+  }
+  @if index(rem, $unit) and not unitless($input) {
+    $input: 0px + $input;
+    $input: num($input) * 1px/$root-size;
+  }
+
+  // Bug fix – resolution units seems to be flipped
+  @if index(dpi dpcm dppx, $unit){
+    $units: (dppx: 0dppx, dpcm: 0dpcm, dpi: 0dpi);
+    $input-unit: map-get($units, unit($input));
+    $input: if(1dppx < 95dpi,num($input-unit + (num($input) + $to-unit)),$input);
+  }
+
+  // Convert
+  @return $to-unit + $input;
+}
+
+// Convesion List
+@function to-unit-list($list, $unit, $options: ()) {
+  $new-list: ();
+
+  @each $value in $list {
+    $converted: to-unit($value, $unit, $options);
+    $new-list: append($new-list, $converted);
+  }
+  @return $new-list;
+}
+
+// Conversion Map
+@function to-unit-map($map, $unit, $options: ()) {
+  $new-map: ();
+
+  @each $key, $value in $map {
+    $converted: to-unit($value, $unit, $options: ());
+    $new-map: map-merge($new-map, ($key: $converted));
+  }
+  @return $new-map;
+}
+
+// Trampoline Function
+@function to-unit-converted($value, $unit, $options: ()) {
+  @return if(is-num($value, false),
+             to-unit($value, $unit, $options),
+             to-unit-data($value, $unit, $options));
+}
+
+// Conversion most of the data.
+@function to-unit-data($data, $unit, $options: ()) {
+  $new-data: ();
+  @if      is-list($data) {
+    @each $value in $data {
+      $converted: to-unit-converted($value, $unit, $options);
+      $new-data: append($new-data, $converted);
+    }
+  }
+  @else if is-map($data) {
+    @each $key, $value in $data {
+      $converted: to-unit-converted($value, $unit, $options);
+      $new-data: map-merge($new-data, ($key: $converted));
+    }
+  }
+  @else {
+    @return if(is-num($data, false), to-unit($data, $unit, $options), $data);
+  }
+  @return $new-data;
+}
+
+//  Convert number to ratio (fraction)
+//  ratio(1.7777778) =>   16/9
+@function ratio($x, $y: null){
+  @if not $y {
+    $n: $x; $y: 1;
+    @while $y < 10 {
+      $x:  $n * 10 - ((10 - $y) * $n);
+      @if $x == round($x){ @return #{$x}/#{$y}; }
+      @else { $y: $y + 1; }
+    }
+    $x: round($n * 1000000); $y: 1000000;
+    @while $x % 10 == 0 { $x: $x/10; $y: $y/10; }
+    @while $x % 5 == 0 { $x: $x/5; $y: $y/5; }
+    @while $x % 2 == 0 { $x: $x/2; $y: $y/2; }
+    @return #{$x}/#{$y};
+  }
+  @else if $x == round($x) and $y == round($y){ @return #{$x}/#{$y}; }
+  @warn 'X and Y must be integers'; @return false;
+}
+
+
+// == Interface - Convert ======================================================
+// Absolute lengths
+@function px($input, $options: ()) { @return to-unit($input, px, $options); }
+@function pt($input, $options: ()) { @return to-unit($input, pt, $options); }
+@function pc($input, $options: ()) { @return to-unit($input, pc, $options); }
+@function mm($input, $options: ()) { @return to-unit($input, mm, $options); }
+@function cm($input, $options: ()) { @return to-unit($input, cm, $options); }
+@function in($input, $options: ()) { @return to-unit($input, in, $options); }
+
+// Relative lengths
+@function em($input, $options: ()) {
+  $em: to-unit(nth($input, 1), em, $options);
+  // Adjust for compounds (visual size)
+  @if length($input) > 1 {
+    @for $i from 2 through length($input) {
+      $em: $em / num(em(nth($input, $i), $options));
+    }
+  }
+  @return $em;
+}
+@function rem($input, $options: ()) { @return to-unit($input, rem, $options); }
+
+// Inconvertible relative lengths – depends on font
+@function ex($input, $options: ()) { @return to-unit($input, ex, $options); }
+@function ch($input, $options: ()) { @return to-unit($input, ch, $options); }
+
+// Relative lengths - Viewport
+@function   vw($input, $options: ()) { @return to-unit($input,   vw, $options); }
+@function   vh($input, $options: ()) { @return to-unit($input,   vh, $options); }
+@function vmin($input, $options: ()) { @return to-unit($input, vmin, $options); }
+@function vmax($input, $options: ()) { @return to-unit($input, vmax, $options); }
+
+// Angles
+@function  deg($input, $options: ()) { @return to-unit($input,  deg, $options); }
+@function  rad($input, $options: ()) { @return to-unit($input,  rad, $options); }
+@function grad($input, $options: ()) { @return to-unit($input, grad, $options); }
+@function turn($input, $options: ()) { @return to-unit($input, turn, $options); }
+
+// Time
+@function ms($input, $options: ()) { @return to-unit($input, ms, $options); }
+@function  s($input, $options: ()) { @return to-unit($input,  s, $options); }
+
+// Frequencies
+@function  hz($input, $options: ()) { @return to-unit($input,  hz, $options); }
+@function khz($input, $options: ()) { @return to-unit($input, khz, $options); }
+
+// Resolution
+@function  dpi($input, $options: ()) { @return to-unit($input,  dpi, $options); }
+@function dpcm($input, $options: ()) { @return to-unit($input, dpcm, $options); }
+@function dppx($input, $options: ()) { @return to-unit($input, dppx, $options); }
+
+// Strings and numbers
+// https://css-tricks.com/snippets/sass/strip-unit-function/
+// https://stackoverflow.com/questions/47630616/scss-arithmetic-operation-with-string
+@function str($input) { @return #{$input};  }
+@function num($input) {
+  @if is-num($input) { @return $input; }
+  @if type-of($input) == 'number' and not unitless($input) {
+    @return $input / ($input * 0 + 1);
+  } @else if type-of($input) != 'string' {
+    @error 'Could not convert `#{$input}` - must be `type-of number or a string.`';
+    @return null;
+  }
+
+  $result: 0;
+  $digits: 0;
+  $minus: str-slice($input, 1, 1) == '-';
+  $numbers: ('0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9);
+
+  @for $i from if($minus, 2, 1) through str-length($input) {
+    $character: str-slice($input, $i, $i);
+
+    @if (index(map-keys($numbers), $character) or $character == '.') {
+      @if $character == '.' {
+        $digits: 1;
+      } @else if $digits == 0 {
+        $result: $result * 10 + map-get($numbers, $character);
+      } @else {
+        $digits: $digits * 10;
+        $result: $result + map-get($numbers, $character) / $digits;
+      }
+    }
+  }
+
+  @return if($minus, -$result, $result);;
+}
+@function int($input) {
+  $num: num($input);
+  @return if($num<0, ceil($num), floor($num));
+}
+@function uint($input) { @return abs(int($input)); }
+
+// Aliases
+@function string($input) { @return str($input); }
+@function number($input) { @return num($input); }
+
+
+// == Interface - Check ========================================================
+// Absolute lengths
+@function is-px($input) { @return get-unit($input) == 'px'; }
+@function is-pt($input) { @return get-unit($input) == 'pt'; }
+@function is-pc($input) { @return get-unit($input) == 'pc'; }
+@function is-mm($input) { @return get-unit($input) == 'mm'; }
+@function is-cm($input) { @return get-unit($input) == 'cm'; }
+@function is-in($input) { @return get-unit($input) == 'in'; }
+
+// Relative lengths - font based
+@function  is-em($input) { @return get-unit($input) ==  'em'; }
+@function is-rem($input) { @return get-unit($input) == 'rem'; }
+@function  is-ex($input) { @return get-unit($input) ==  'ex'; }
+@function  is-ch($input) { @return get-unit($input) ==  'ch'; }
+
+// Relative lengths - viewport based
+@function   is-vw($input) { @return get-unit($input) ==   'vw'; }
+@function   is-vh($input) { @return get-unit($input) ==   'vh'; }
+@function is-vmin($input) { @return get-unit($input) == 'vmin'; }
+@function is-vmax($input) { @return get-unit($input) == 'vmax'; }
+
+// Angles
+@function  is-deg($input) { @return get-unit($input) ==  'deg'; }
+@function  is-rad($input) { @return get-unit($input) ==  'rad'; }
+@function is-grad($input) { @return get-unit($input) == 'grad'; }
+@function is-turn($input) { @return get-unit($input) == 'turn'; }
+
+// Time
+@function is-ms($input) { @return get-unit($input) == 'ms'; }
+@function  is-s($input) { @return get-unit($input) ==  's'; }
+
+// Frequencies
+@function  is-hz($input) { @return get-unit($input) ==  'hz'; }
+@function is-khz($input) { @return get-unit($input) == 'khz'; }
+
+// Resolution
+@function  is-dpi($input) { @return get-unit($input) ==  'dpi'; }
+@function is-dpcm($input) { @return get-unit($input) == 'dpcm'; }
+@function is-dppx($input) { @return get-unit($input) == 'dppx'; }
+
+// Percent, Number, Length, String
+@function  is-pct($input) { @return get-unit($input) ==      '%'; }
+@function  is-num($input, $strict: true) {
+  @return if($strict, get-unit($input) == 'num', type-of($input) == 'number');
+}
+@function  is-len($input) {
+  @return is-num($input) != is-num($input, false);
+}
+@function  is-str($input) { @return get-unit($input) == 'string'; }
+
+// ETC: SASS Types
+@function  is-null($input, $strict: true) {
+  $null-check: get-unit($input) == 'null';
+  @return if($strict, $null-check, $null-check or length($input) == 0 or $input == '');
+}
+@function  is-bool($input) { @return get-unit($input) ==  'bool'; }
+@function  is-list($input) { @return get-unit($input) ==  'list'; }
+@function   is-map($input) { @return get-unit($input) ==   'map'; }
+@function is-color($input) { @return get-unit($input) == 'color'; }
+
+@function is-equal($inputA, $inputB) { @return $inputA == $inputB; }
+@function is-exist($input, $strict: true) {
+  $variable-exists: variable-exists($input);
+  @return if($strict, $variable-exists, $variable-exists and $input);
+}
+@function is-calc($input) {
+  @if not is-str($input) {
+    @return false;
+  }
+  @else {
+    $str-front:  str-slice($input, 1, 5) == "calc(";
+    $str-back:   str-slice($input, str-length($input)) == ")";
+    @return $str-front and $str-back;
+  }
+}
+
+// Aliases
+@function is-percent($input) { @return is-pct($input); }
+@function  is-number($input, $strict: true) { @return is-num($input, $strict); }
+@function  is-length($input) { @return is-len($input); }
+@function  is-string($input) { @return is-str($input); }
+
+$defaults: (
+  "small": (min-width: 320px), 
+  "medium": (min-width: 750px),
+  "large": (min-width: 1000px),
+  "xlarge": (min-width: 1300px),
+  "pointer": (pointer: fine) and (hover: hover),
+  "touch": (pointer: coarse) and (hover: none)
+);
+
+$queries: ()!default;
 /// https://hugogiraudel.com/2013/10/09/advanced-sass-list-functions-again/
 
 @function remove-duplicates($list, $recursive: false) {  
@@ -14,16 +651,6 @@
   @return $result;
 }
 
-$defaults: (
-  "small": (min-width: 320px), 
-  "medium": (min-width: 750px),
-  "large": (min-width: 1000px),
-  "xlarge": (min-width: 1300px),
-  "pointer": (pointer: fine) and (hover: hover),
-  "touch": (pointer: coarse) and (hover: none)
-);
-
-$queries: ()!default;
 /// Original mixins https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/
 
 /// @author Davide Marchet
