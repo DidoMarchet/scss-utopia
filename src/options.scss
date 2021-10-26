@@ -1,10 +1,19 @@
-$defaults: (
+$defaults_breakpoints: (
   "small": (min-width: 320px), 
+  "xsmall": (min-width: 480px),
   "medium": (min-width: 750px),
   "large": (min-width: 1000px),
   "xlarge": (min-width: 1300px),
+  "xxlarge": (min-width: 1600px),
   "pointer": (pointer: fine) and (hover: hover),
   "touch": (pointer: coarse) and (hover: none)
 );
 
-$queries: ()!default;
+$breakpoints: ()!default;
+
+$defaults_limits: (
+  "min": 480px, 
+  "max": 1600px
+);
+
+$limits: ()!default;

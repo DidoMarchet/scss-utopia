@@ -5,7 +5,7 @@
 /// @require $queries
 
 @mixin react($query) {
-  $merged: map-merge($defaults, $queries);
+  $merged: map-merge($defaults_breakpoints, $breakpoints);
   @if map-has-key($merged, $query) {
     @media #{inspect(map-get($merged, $query))} {
       @content;
@@ -13,6 +13,6 @@
   }
   @else {
     @warn "No value could be retrieved from `#{$query}`. "
-        + "Available queries are: #{map-keys(map-merge($defaults, $queries))}.";
+        + "Available queries are: #{map-keys(map-merge($defaults_breakpoints, $breakpoints))}.";
   }
 }
