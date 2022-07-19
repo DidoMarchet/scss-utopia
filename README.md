@@ -1,5 +1,7 @@
 # scss-utopia: save time, build fast (almost everything)
 
+**:bangbang: Use these distinct modules for clamp - [scss-slamp](https://github.com/DidoMarchet/scss-slamp) - and media queries - [scss-react](https://github.com/DidoMarchet/scss-slamp) - :bangbang:**
+
 :book: From [https://en.wiktionary.org/wiki/utopia](https://en.wiktionary.org/wiki/utopia)
 > **utopia**
 > 
